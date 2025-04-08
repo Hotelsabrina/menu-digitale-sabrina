@@ -10,28 +10,29 @@
   <div class="container">
     <img src="https://www.hotelsabrinaonline.it/wp-content/uploads/2022/06/Logo-Hotel-Sabrina-50-anni-2022-01.png" alt="Logo Hotel Sabrina" class="logo" />
 
-    <h1>Benvenuti al Menù Digitale</h1>
+    <h1>Menù Digitale</h1>
 
+    <!-- Accesso iniziale -->
     <div id="intro">
-      <p><strong>Compila i dati iniziali per accedere al menù del giorno:</strong></p>
       <form id="accessForm">
         <label for="camera">Numero Camera:</label>
-        <input type="number" id="camera" required />
+        <input type="number" id="camera" required placeholder="Es. 105" />
 
         <label for="persone">Numero Persone:</label>
-        <input type="number" id="persone" required />
+        <input type="number" id="persone" required placeholder="Es. 2" />
 
         <label for="cognome">Cognome:</label>
-        <input type="text" id="cognome" required />
+        <input type="text" id="cognome" required placeholder="Cognome cliente" />
 
-        <button type="submit">Avanti</button>
+        <button type="submit">Vai al Menù</button>
       </form>
     </div>
 
+    <!-- Form del menù (inizialmente nascosto) -->
     <div id="menuForm" class="hidden">
       <div class="note-box">
-        <p><strong>Compila solo i campi desiderati.</strong><br />
-        Se selezioni solo pranzo o solo cena, consideriamo mezza pensione.<br />
+        <p><strong>Compila solo i campi desiderati.</strong><br>
+        Se selezioni solo pranzo o solo cena, consideriamo mezza pensione.<br>
         Se compili entrambi, consideriamo pensione completa.</p>
       </div>
 
@@ -40,28 +41,28 @@
 
         <label>Primi:</label>
         <select required>
-          <option value="">-- Seleziona un primo --</option>
+          <option value="">-- Seleziona --</option>
           <option>Lasagna al forno</option>
           <option>Spaghetti alle vongole</option>
         </select>
 
         <label>Secondi:</label>
         <select>
-          <option value="">-- Seleziona un secondo --</option>
+          <option value="">-- Seleziona --</option>
           <option>Pollo arrosto</option>
           <option>Orata al forno</option>
         </select>
 
         <label>Contorni:</label>
         <select>
-          <option value="">-- Seleziona un contorno --</option>
+          <option value="">-- Seleziona --</option>
           <option>Insalata verde</option>
           <option>Patate al forno</option>
         </select>
 
         <label>Dessert:</label>
         <select>
-          <option value="">-- Seleziona un dessert --</option>
+          <option value="">-- Seleziona --</option>
           <option>Tiramisù</option>
           <option>Macedonia</option>
         </select>
@@ -70,61 +71,47 @@
 
         <label>Primi:</label>
         <select>
-          <option value="">-- Seleziona un primo --</option>
+          <option value="">-- Seleziona --</option>
           <option>Risotto ai funghi</option>
           <option>Pasta al pesto</option>
         </select>
 
         <label>Secondi:</label>
         <select>
-          <option value="">-- Seleziona un secondo --</option>
+          <option value="">-- Seleziona --</option>
           <option>Bistecca</option>
           <option>Filetto di branzino</option>
         </select>
 
         <label>Contorni:</label>
         <select>
-          <option value="">-- Seleziona un contorno --</option>
+          <option value="">-- Seleziona --</option>
           <option>Verdure grigliate</option>
           <option>Purè di patate</option>
         </select>
 
         <label>Dessert:</label>
         <select>
-          <option value="">-- Seleziona un dessert --</option>
+          <option value="">-- Seleziona --</option>
           <option>Crema catalana</option>
           <option>Gelato</option>
         </select>
 
-        <label>Piatti extra / richieste particolari:</label>
-        <textarea placeholder="Scrivi qui richieste o intolleranze..."></textarea>
+        <label>Piatti extra o richieste particolari:</label>
+        <textarea placeholder="Scrivi qui le richieste..."></textarea>
 
         <label>Esigenze alimentari:</label>
         <div class="checkboxes">
-          <label><input type="checkbox"> Celiaco</label>
-          <label><input type="checkbox"> Vegetariano</label>
-          <label><input type="checkbox"> Intolleranza lattosio</label>
+          <label><input type="checkbox" /> Celiaco</label>
+          <label><input type="checkbox" /> Vegetariano</label>
+          <label><input type="checkbox" /> Intolleranza lattosio</label>
         </div>
 
         <div class="callout">
-          📞 Dalla vostra camera chiamare il numero <strong>253</strong> per parlare direttamente con la cucina
+          📞 Dalla vostra camera chiamare il numero <strong>253</strong> per parlare con la cucina
         </div>
 
         <button type="submit">Invia Menù</button>
       </form>
     </div>
-  </div>
-
-  <script>
-    const formAccess = document.getElementById("accessForm");
-    const menuForm = document.getElementById("menuForm");
-    const intro = document.getElementById("intro");
-
-    formAccess.addEventListener("submit", function(e) {
-      e.preventDefault();
-      intro.style.display = "none";
-      menuForm.classList.remove("hidden");
-    });
-  </script>
-</body>
-</html>
+  </
