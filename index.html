@@ -114,4 +114,28 @@
         <button type="submit">Invia Menù</button>
       </form>
     </div>
-  </
+  </div>
+
+  <script>
+    const formAccess = document.getElementById("accessForm");
+    const menuForm = document.getElementById("menuForm");
+    const intro = document.getElementById("intro");
+
+    formAccess.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const camera = document.getElementById("camera").value.trim();
+      const persone = document.getElementById("persone").value.trim();
+      const cognome = document.getElementById("cognome").value.trim();
+
+      if (camera && persone && cognome) {
+        intro.style.display = "none";
+        menuForm.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        alert("Per favore, compila tutti i campi prima di proseguire.");
+      }
+    });
+  </script>
+</body>
+</html>
