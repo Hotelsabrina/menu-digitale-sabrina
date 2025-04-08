@@ -1,41 +1,119 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menù del Giorno - Hotel Sabrina</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menù Digitale - Hotel Sabrina</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <header>
-      <img src="https://www.hotelsabrinaonline.it/wp-content/uploads/2022/06/Logo-Hotel-Sabrina-50-anni-2022-01.png" alt="Hotel Sabrina Logo" class="logo">
-      <h1>Menù del Giorno</h1>
-    </header>
+    <img src="https://www.hotelsabrinaonline.it/wp-content/uploads/2022/06/Logo-Hotel-Sabrina-50-anni-2022-01.png" alt="Logo Hotel Sabrina" class="logo">
 
-    <section class="form-section">
-      <h2>Compila il tuo menù</h2>
-      <p class="form-note">
-        Scegli pranzo, cena o entrambi. Il nostro staff preparerà il tuo menù in base alle selezioni.<br>
-        I piatti selezionati verranno stampati nel formato standard del nostro ristorante.<br>
-        Le richieste particolari non verranno stampate ma verranno viste dallo staff.
-      </p>
+    <h1>Benvenuti al Menù Digitale</h1>
 
-      <iframe 
-        src="https://docs.google.com/forms/d/e/1FAIpQLScjzNVUXD9D7EQf_HU1G6akBXqSVK2qvgz6of4P2kjfN5zVLg/viewform?embedded=true" 
-        width="100%" 
-        height="1400" 
-        frameborder="0" 
-        marginheight="0" 
-        marginwidth="0"
-        style="border:none;">
-        Caricamento…
-      </iframe>
-    </section>
+    <div id="intro">
+      <p><strong>Compila i dati iniziali per accedere al menù del giorno:</strong></p>
+      <form id="accessForm">
+        <label for="camera">Numero Camera:</label>
+        <input type="number" id="camera" required />
+        <label for="persone">Numero Persone:</label>
+        <input type="number" id="persone" required />
+        <label for="cognome">Cognome:</label>
+        <input type="text" id="cognome" required />
+        <button type="submit">Avanti</button>
+      </form>
+    </div>
 
-    <footer>
-      <p>&copy; 2025 Hotel Sabrina - Tutti i diritti riservati</p>
-    </footer>
+    <div id="menuForm" class="hidden">
+      <div class="note-box">
+        <p><strong>Compila solo i campi desiderati.</strong><br>
+        Se selezioni solo pranzo o solo cena, consideriamo mezza pensione.<br>
+        Se compili entrambi, consideriamo pensione completa.</p>
+      </div>
+
+      <form id="menuDataForm">
+        <h2>Pranzo</h2>
+        <label>Primi:</label>
+        <select required>
+          <option value="">-- Seleziona un primo --</option>
+          <option>Lasagna al forno</option>
+          <option>Spaghetti alle vongole</option>
+        </select>
+        <label>Secondi:</label>
+        <select>
+          <option value="">-- Seleziona un secondo --</option>
+          <option>Pollo arrosto</option>
+          <option>Orata al forno</option>
+        </select>
+        <label>Contorni:</label>
+        <select>
+          <option value="">-- Seleziona un contorno --</option>
+          <option>Insalata verde</option>
+          <option>Patate al forno</option>
+        </select>
+        <label>Dessert:</label>
+        <select>
+          <option value="">-- Seleziona un dessert --</option>
+          <option>Tiramisù</option>
+          <option>Macedonia</option>
+        </select>
+
+        <h2>Cena</h2>
+        <label>Primi:</label>
+        <select>
+          <option value="">-- Seleziona un primo --</option>
+          <option>Risotto ai funghi</option>
+          <option>Pasta al pesto</option>
+        </select>
+        <label>Secondi:</label>
+        <select>
+          <option value="">-- Seleziona un secondo --</option>
+          <option>Bistecca</option>
+          <option>Filetto di branzino</option>
+        </select>
+        <label>Contorni:</label>
+        <select>
+          <option value="">-- Seleziona un contorno --</option>
+          <option>Verdure grigliate</option>
+          <option>Purè di patate</option>
+        </select>
+        <label>Dessert:</label>
+        <select>
+          <option value="">-- Seleziona un dessert --</option>
+          <option>Crema catalana</option>
+          <option>Gelato</option>
+        </select>
+
+        <label>Piatti extra / richieste particolari:</label>
+        <textarea placeholder="Scrivi qui richieste o intolleranze..."></textarea>
+
+        <label>Esigenze alimentari:</label>
+        <div class="checkboxes">
+          <label><input type="checkbox"> Celiaco</label>
+          <label><input type="checkbox"> Vegetariano</label>
+          <label><input type="checkbox"> Intolleranza lattosio</label>
+        </div>
+
+        <div class="callout">
+          📞 Dalla vostra camera chiamare il numero **253** per parlare direttamente con la cucina
+        </div>
+
+        <button type="submit">Invia Menù</button>
+      </form>
+    </div>
   </div>
+
+  <script>
+    const formAccess = document.getElementById("accessForm");
+    const menuForm = document.getElementById("menuForm");
+    const intro = document.getElementById("intro");
+
+    formAccess.addEventListener("submit", function(e) {
+      e.preventDefault();
+      intro.style.display = "none";
+      menuForm.classList.remove("hidden");
+    });
+  </script>
 </body>
 </html>
