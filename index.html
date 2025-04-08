@@ -2,140 +2,65 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Menù Digitale - Hotel Sabrina</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menù del Giorno - Hotel Sabrina</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fdf6ed;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .logo {
+      max-width: 250px;
+      margin: 2rem auto;
+      display: block;
+    }
+
+    h1 {
+      color: #2c4a7a;
+      margin-bottom: 1rem;
+    }
+
+    iframe {
+      width: 100%;
+      height: 2000px;
+      border: none;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      iframe {
+        height: 2300px;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <img src="https://www.hotelsabrinaonline.it/wp-content/uploads/2022/06/Logo-Hotel-Sabrina-50-anni-2022-01.png" alt="Logo Hotel Sabrina" class="logo" />
+    <img
+      src="https://www.hotelsabrinaonline.it/wp-content/uploads/2022/06/Logo-Hotel-Sabrina-50-anni-2022-01.png"
+      alt="Logo Hotel Sabrina"
+      class="logo"
+    />
+    <h1>Compila il menù del giorno</h1>
 
-    <h1>Menù Digitale</h1>
-
-    <!-- Accesso iniziale -->
-    <div id="intro">
-      <form id="accessForm">
-        <label for="camera">Numero Camera:</label>
-        <input type="number" id="camera" required placeholder="Es. 105" />
-
-        <label for="persone">Numero Persone:</label>
-        <input type="number" id="persone" required placeholder="Es. 2" />
-
-        <label for="cognome">Cognome:</label>
-        <input type="text" id="cognome" required placeholder="Cognome cliente" />
-
-        <button type="submit">Vai al Menù</button>
-      </form>
-    </div>
-
-    <!-- Form del menù (inizialmente nascosto) -->
-    <div id="menuForm" class="hidden">
-      <div class="note-box">
-        <p><strong>Compila solo i campi desiderati.</strong><br>
-        Se selezioni solo pranzo o solo cena, consideriamo mezza pensione.<br>
-        Se compili entrambi, consideriamo pensione completa.</p>
-      </div>
-
-      <form id="menuDataForm">
-        <h2>Pranzo</h2>
-
-        <label>Primi:</label>
-        <select required>
-          <option value="">-- Seleziona --</option>
-          <option>Lasagna al forno</option>
-          <option>Spaghetti alle vongole</option>
-        </select>
-
-        <label>Secondi:</label>
-        <select>
-          <option value="">-- Seleziona --</option>
-          <option>Pollo arrosto</option>
-          <option>Orata al forno</option>
-        </select>
-
-        <label>Contorni:</label>
-        <select>
-          <option value="">-- Seleziona --</option>
-          <option>Insalata verde</option>
-          <option>Patate al forno</option>
-        </select>
-
-        <label>Dessert:</label>
-        <select>
-          <option value="">-- Seleziona --</option>
-          <option>Tiramisù</option>
-          <option>Macedonia</option>
-        </select>
-
-        <h2>Cena</h2>
-
-        <label>Primi:</label>
-        <select>
-          <option value="">-- Seleziona --</option>
-          <option>Risotto ai funghi</option>
-          <option>Pasta al pesto</option>
-        </select>
-
-        <label>Secondi:</label>
-        <select>
-          <option value="">-- Seleziona --</option>
-          <option>Bistecca</option>
-          <option>Filetto di branzino</option>
-        </select>
-
-        <label>Contorni:</label>
-        <select>
-          <option value="">-- Seleziona --</option>
-          <option>Verdure grigliate</option>
-          <option>Purè di patate</option>
-        </select>
-
-        <label>Dessert:</label>
-        <select>
-          <option value="">-- Seleziona --</option>
-          <option>Crema catalana</option>
-          <option>Gelato</option>
-        </select>
-
-        <label>Piatti extra o richieste particolari:</label>
-        <textarea placeholder="Scrivi qui le richieste..."></textarea>
-
-        <label>Esigenze alimentari:</label>
-        <div class="checkboxes">
-          <label><input type="checkbox" /> Celiaco</label>
-          <label><input type="checkbox" /> Vegetariano</label>
-          <label><input type="checkbox" /> Intolleranza lattosio</label>
-        </div>
-
-        <div class="callout">
-          📞 Dalla vostra camera chiamare il numero <strong>253</strong> per parlare con la cucina
-        </div>
-
-        <button type="submit">Invia Menù</button>
-      </form>
-    </div>
+    <iframe
+      src="https://docs.google.com/forms/d/e/1FAIpQLScjzNVUXD9D7EQf_HU1G6akBXqSVK2qvgz6of4P2kjfN5zVLg/viewform?embedded=true"
+      frameborder="0"
+      allowfullscreen
+    >
+      Caricamento modulo…
+    </iframe>
   </div>
-
-  <script>
-    const formAccess = document.getElementById("accessForm");
-    const menuForm = document.getElementById("menuForm");
-    const intro = document.getElementById("intro");
-
-    formAccess.addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      const camera = document.getElementById("camera").value.trim();
-      const persone = document.getElementById("persone").value.trim();
-      const cognome = document.getElementById("cognome").value.trim();
-
-      if (camera && persone && cognome) {
-        intro.style.display = "none";
-        menuForm.classList.remove("hidden");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        alert("Per favore, compila tutti i campi prima di proseguire.");
-      }
-    });
-  </script>
 </body>
 </html>
