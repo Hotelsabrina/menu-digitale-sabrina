@@ -71,117 +71,18 @@
       padding: 1rem;
       margin-top: 2rem;
     }
+
+    .confirmation {
+      display: none;
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background-color: #e7f5e7;
+      color: #2e7d32;
+      border-left: 6px solid #2e7d32;
+      font-size: 1.2rem;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <img class="logo" src="https://www.hotelsabrinaonline.it/wp-content/uploads/2022/06/Logo-Hotel-Sabrina-50-anni-2022-01.png" alt="Hotel Sabrina">
-    <h1>Menù del Giorno</h1>
-
-    <form id="accessForm">
-      <label for="camera">Numero Camera</label>
-      <input type="number" id="camera" required>
-
-      <label for="persone">Numero Persone</label>
-      <input type="number" id="persone" required>
-
-      <label for="cognome">Cognome</label>
-      <input type="text" id="cognome" required>
-
-      <button type="submit">Vai al Menù</button>
-    </form>
-
-    <form id="menuForm" class="hidden">
-      <div class="note">
-        Compila il menù selezionando i piatti dal menù a tendina. Se compili solo il pranzo o la cena, verrà considerata mezza pensione.
-      </div>
-
-      <label>Primi Pranzo</label>
-      <select required>
-        <option value="">Seleziona...</option>
-        <option>Lasagna al forno</option>
-        <option>Spaghetti alle vongole</option>
-      </select>
-
-      <label>Secondi Pranzo</label>
-      <select>
-        <option value="">Seleziona...</option>
-        <option>Orata al forno</option>
-        <option>Pollo arrosto</option>
-      </select>
-
-      <label>Contorni Pranzo</label>
-      <select>
-        <option value="">Seleziona...</option>
-        <option>Insalata verde</option>
-        <option>Patate al forno</option>
-      </select>
-
-      <label>Dessert Pranzo</label>
-      <select>
-        <option value="">Seleziona...</option>
-        <option>Tiramisù</option>
-        <option>Macedonia</option>
-      </select>
-
-      <label>Primi Cena</label>
-      <select>
-        <option value="">Seleziona...</option>
-        <option>Risotto ai funghi</option>
-        <option>Pasta al pesto</option>
-      </select>
-
-      <label>Secondi Cena</label>
-      <select>
-        <option value="">Seleziona...</option>
-        <option>Bistecca</option>
-        <option>Filetto di branzino</option>
-      </select>
-
-      <label>Contorni Cena</label>
-      <select>
-        <option value="">Seleziona...</option>
-        <option>Verdure grigliate</option>
-        <option>Purè di patate</option>
-      </select>
-
-      <label>Dessert Cena</label>
-      <select>
-        <option value="">Seleziona...</option>
-        <option>Gelato</option>
-        <option>Crema catalana</option>
-      </select>
-
-      <label>Richieste particolari</label>
-      <textarea rows="3" placeholder="Scrivi qui richieste extra o note..."></textarea>
-
-      <label>Esigenze alimentari</label>
-      <label><input type="checkbox" name="esigenze" value="Celiaco"> Celiaco</label>
-      <label><input type="checkbox" name="esigenze" value="Vegetariano"> Vegetariano</label>
-      <label><input type="checkbox" name="esigenze" value="Lattosio"> Intolleranza al lattosio</label>
-
-      <p><strong>📞 Dalla vostra camera chiamare il numero 253 per parlare direttamente con la cucina.</strong></p>
-
-      <button type="submit">Invia Menù</button>
-    </form>
-  </div>
-
-  <script>
-    const accessForm = document.getElementById("accessForm");
-    const menuForm = document.getElementById("menuForm");
-
-    accessForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      accessForm.classList.add("hidden");
-      menuForm.classList.remove("hidden");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    menuForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("Grazie! Il tuo menù è stato inviato alla cucina.");
-      // Qui potremo aggiungere invio a email / Telegram / Google Sheets
-    });
-  </script>
-</body>
-</html>
+    <img class="logo" src="https://www.hotelsabrinaonline.it/wp-content/uploads/2022/06/Logo-Hotel-Sabrina-
