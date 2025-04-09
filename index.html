@@ -11,6 +11,12 @@
       color: #333;
     }
 
+    h1 {
+      text-align: center;
+      color: #003366;
+      margin-bottom: 30px;
+    }
+
     h2 {
       font-size: 22px;
       color: #003366;
@@ -30,7 +36,7 @@
       margin-top: 15px;
     }
 
-    select, input[type="text"] {
+    select, input[type="text"], input[type="number"] {
       width: 100%;
       padding: 8px;
       margin-top: 5px;
@@ -63,6 +69,16 @@
 <body>
   <div class="container">
     <h1>Menù del Giorno</h1>
+
+    <!-- Info cliente -->
+    <label for="cognome">Cognome</label>
+    <input type="text" id="cognome" name="cognome" placeholder="Inserisci il cognome">
+
+    <label for="camera">Numero della camera</label>
+    <input type="number" id="camera" name="camera" placeholder="Es. 203">
+
+    <label for="persone">Numero di persone</label>
+    <input type="number" id="persone" name="persone" placeholder="Es. 2">
 
     <!-- Sezione PRANZO -->
     <h2>🍽️ Menù Pranzo</h2>
