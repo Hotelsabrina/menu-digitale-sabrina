@@ -1,213 +1,142 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Menù del Giorno - Hotel Sabrina</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fdf6ed;
+      font-family: Arial, sans-serif;
+      background-color: #fef9f5;
+      padding: 30px;
       color: #333;
-      margin: 0;
-      padding: 0;
     }
 
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 2rem;
+    h2 {
+      font-size: 22px;
+      color: #003366;
+      margin-top: 40px;
+      margin-bottom: 10px;
     }
 
-    .logo {
-      display: block;
-      margin: auto;
-      max-width: 220px;
-    }
-
-    h1 {
-      text-align: center;
-      color: #2c4a7a;
-    }
-
-    form {
-      margin-top: 2rem;
-    }
-
-    .hidden {
-      display: none;
+    hr {
+      border: none;
+      border-top: 2px solid #ccc;
+      margin-bottom: 20px;
     }
 
     label {
       font-weight: bold;
       display: block;
-      margin-top: 1rem;
+      margin-top: 15px;
     }
 
-    input, select, textarea, button {
+    select, input[type="text"] {
       width: 100%;
-      padding: 0.7rem;
-      margin-top: 0.3rem;
-      border-radius: 5px;
+      padding: 8px;
+      margin-top: 5px;
       border: 1px solid #ccc;
-      font-size: 1rem;
+      border-radius: 4px;
+      background-color: #fff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     button {
-      background-color: #2c4a7a;
+      margin-top: 30px;
+      background-color: #003366;
       color: white;
+      padding: 10px 20px;
       border: none;
-      margin-top: 2rem;
+      border-radius: 5px;
+      font-size: 16px;
       cursor: pointer;
     }
 
     button:hover {
-      background-color: #1e3559;
-    }
-
-    .note {
-      background: #fff8dc;
-      border-left: 5px solid #2c4a7a;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-
-    .confirmation {
-      display: none;
-      margin-top: 2rem;
-      padding: 1.5rem;
-      background-color: #e7f5e7;
-      color: #2e7d32;
-      border-left: 6px solid #2e7d32;
-      font-size: 1.2rem;
+      background-color: #005599;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img class="logo" src="https://www.hotelsabrinaonline.it/wp-content/uploads/2022/06/Logo-Hotel-Sabrina-50-anni-2022-01.png" alt="Hotel Sabrina">
     <h1>Menù del Giorno</h1>
 
-    <form id="accessForm">
-      <label for="camera">Numero Camera</label>
-      <input type="number" name="camera" required>
+    <!-- Sezione PRANZO -->
+    <h2>🍽️ Menù Pranzo</h2>
+    <hr>
 
-      <label for="persone">Numero Persone</label>
-      <input type="number" name="persone" required>
+    <label for="primoPranzo">Primi Pranzo</label>
+    <select id="primoPranzo" name="primoPranzo">
+      <option value="">Seleziona un primo</option>
+      <option>Spaghetti alle vongole</option>
+      <option>Lasagne</option>
+      <option>Risotto ai funghi</option>
+    </select>
 
-      <label for="cognome">Cognome</label>
-      <input type="text" name="cognome" required>
+    <label for="secondoPranzo">Secondi Pranzo</label>
+    <select id="secondoPranzo" name="secondoPranzo">
+      <option value="">Seleziona un secondo</option>
+      <option>Pollo arrosto</option>
+      <option>Frittura mista</option>
+      <option>Scaloppine al limone</option>
+    </select>
 
-      <button type="submit">Vai al Menù</button>
-    </form>
+    <label for="contornoPranzo">Contorni Pranzo</label>
+    <select id="contornoPranzo" name="contornoPranzo">
+      <option value="">Seleziona un contorno</option>
+      <option>Patate al forno</option>
+      <option>Insalata</option>
+      <option>Verdure grigliate</option>
+    </select>
 
-    <form id="menuForm" class="hidden">
-      <div class="note">
-        Compila il menù selezionando i piatti dal menù a tendina. Se compili solo il pranzo o la cena, verrà considerata mezza pensione.
-      </div>
+    <label for="dessertPranzo">Dessert Pranzo</label>
+    <select id="dessertPranzo" name="dessertPranzo">
+      <option value="">Seleziona un dessert</option>
+      <option>Macedonia</option>
+      <option>Tiramisù</option>
+      <option>Panna cotta</option>
+    </select>
 
-      <label>Primi Pranzo</label>
-      <select name="primi_pranzo">
-        <option value="">Seleziona...</option>
-        <option>Lasagna al forno</option>
-        <option>Spaghetti alle vongole</option>
-      </select>
+    <!-- Sezione CENA -->
+    <h2>🌙 Menù Cena</h2>
+    <hr>
 
-      <label>Secondi Pranzo</label>
-      <select name="secondi_pranzo">
-        <option value="">Seleziona...</option>
-        <option>Orata al forno</option>
-        <option>Pollo arrosto</option>
-      </select>
+    <label for="primoCena">Primi Cena</label>
+    <select id="primoCena" name="primoCena">
+      <option value="">Seleziona un primo</option>
+      <option>Pasta al pesto</option>
+      <option>Ravioli burro e salvia</option>
+      <option>Minestrone</option>
+    </select>
 
-      <label>Contorni Pranzo</label>
-      <select name="contorni_pranzo">
-        <option value="">Seleziona...</option>
-        <option>Insalata verde</option>
-        <option>Patate al forno</option>
-      </select>
+    <label for="secondoCena">Secondi Cena</label>
+    <select id="secondoCena" name="secondoCena">
+      <option value="">Seleziona un secondo</option>
+      <option>Filetto di branzino</option>
+      <option>Bistecca</option>
+      <option>Polpette al sugo</option>
+    </select>
 
-      <label>Dessert Pranzo</label>
-      <select name="dessert_pranzo">
-        <option value="">Seleziona...</option>
-        <option>Tiramisù</option>
-        <option>Macedonia</option>
-      </select>
+    <label for="contornoCena">Contorni Cena</label>
+    <select id="contornoCena" name="contornoCena">
+      <option value="">Seleziona un contorno</option>
+      <option>Purè di patate</option>
+      <option>Carote lesse</option>
+      <option>Insalata mista</option>
+    </select>
 
-      <label>Primi Cena</label>
-      <select name="primi_cena">
-        <option value="">Seleziona...</option>
-        <option>Risotto ai funghi</option>
-        <option>Pasta al pesto</option>
-      </select>
+    <label for="dessertCena">Dessert Cena</label>
+    <select id="dessertCena" name="dessertCena">
+      <option value="">Seleziona un dessert</option>
+      <option>Gelato</option>
+      <option>Crostata</option>
+      <option>Frutta fresca</option>
+    </select>
 
-      <label>Secondi Cena</label>
-      <select name="secondi_cena">
-        <option value="">Seleziona...</option>
-        <option>Bistecca</option>
-        <option>Filetto di branzino</option>
-      </select>
-
-      <label>Contorni Cena</label>
-      <select name="contorni_cena">
-        <option value="">Seleziona...</option>
-        <option>Verdure grigliate</option>
-        <option>Purè di patate</option>
-      </select>
-
-      <label>Dessert Cena</label>
-      <select name="dessert_cena">
-        <option value="">Seleziona...</option>
-        <option>Gelato</option>
-        <option>Crema catalana</option>
-      </select>
-
-      <label>Richieste particolari</label>
-      <textarea name="extra" rows="3" placeholder="Scrivi qui richieste extra o note..."></textarea>
-
-      <label>Esigenze alimentari</label>
-      <label><input type="checkbox" name="esigenze" value="Celiaco"> Celiaco</label>
-      <label><input type="checkbox" name="esigenze" value="Vegetariano"> Vegetariano</label>
-      <label><input type="checkbox" name="esigenze" value="Lattosio"> Intolleranza al lattosio</label>
-
-      <button type="submit">Invia Menù</button>
-    </form>
-
-    <div id="confirm" class="confirmation">✅ Grazie! Il tuo menù è stato inviato alla cucina. Buon appetito!</div>
+    <button type="submit">Invia Menù</button>
   </div>
-
-  <script>
-    const accessForm = document.getElementById("accessForm");
-    const menuForm = document.getElementById("menuForm");
-    const confirmBox = document.getElementById("confirm");
-
-    let accessData = {};
-
-    accessForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const formData = new FormData(accessForm);
-      accessData = Object.fromEntries(formData.entries());
-      accessForm.classList.add("hidden");
-      menuForm.classList.remove("hidden");
-    });
-
-    menuForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const formData = new FormData(menuForm);
-      const menuData = Object.fromEntries(formData.entries());
-
-      const finalData = { ...accessData, ...menuData };
-
-      fetch("https://script.google.com/macros/s/AKfycbzokUc-Gnc9D9LmcC-MsLj1DxTgla-w7haZed7kdD2icKo9JE79LyRD13_YJ6Zc_hmb/exec", {
-        method: "POST",
-        mode: "no-cors",
-        body: new URLSearchParams(finalData)
-      }).then(() => {
-        menuForm.classList.add("hidden");
-        confirmBox.style.display = "block";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-    });
-  </script>
 </body>
 </html>
