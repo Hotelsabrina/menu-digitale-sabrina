@@ -175,14 +175,7 @@
       document.getElementById('step2').classList.remove('hidden');
     }
 
-    document.getElementById("step2").addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      // Messaggio di successo simulato (integra qui invio a Google Apps Script se vuoi)
-      document.getElementById("successMessage").style.display = "block";
-      document.getElementById("step2").classList.add("hidden");
-    });
-
+    // Caricamento automatico del menù dal file Excel del giorno
     window.addEventListener("DOMContentLoaded", async () => {
       const url = "https://script.google.com/macros/s/AKfycbzokUc-Gnc9D9LmcC-MsLj1DxTgla-w7haZed7kdD2icKo9JE79LyRD13_YJ6Zc_hmb/exec";
 
