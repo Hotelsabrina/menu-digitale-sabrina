@@ -1,40 +1,260 @@
-<script>
-  document.getElementById("step2").addEventListener("submit", async function (e) {
-    e.preventDefault();
 
-    const getValue = id => document.getElementById(id)?.value || "";
-
-    const dati = {
-      cognome: getValue("cognome"),
-      camera: getValue("camera"),
-      persone: getValue("persone"),
-      primi_pranzo: getValue("primoPranzo"),
-      secondi_pranzo: getValue("secondoPranzo"),
-      contorni_pranzo: getValue("contornoPranzo"),
-      dessert_pranzo: getValue("dessertPranzo"),
-      extra_pranzo: getValue("extraPranzo"),
-      primi_cena: getValue("primoCena"),
-      secondi_cena: getValue("secondoCena"),
-      contorni_cena: getValue("contornoCena"),
-      dessert_cena: getValue("dessertCena"),
-      extra: getValue("extra"),
-      esigenze: [...document.querySelectorAll('input[name="esigenze"]:checked')].map(e => e.value).join(", ")
-    };
-
-    try {
-      const response = await fetch("LINK_TUO_SCRIPT_MAIL", {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(dati)
-      });
-
-      document.getElementById("step2").classList.add("hidden");
-      document.getElementById("successMessage").style.display = "block";
-
-    } catch (err) {
-      alert("Errore durante l'invio del menù.");
-      console.error(err);
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Menù del Giorno - Hotel Sabrina</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fdf5e6;
+      margin: 0;
+      padding: 0;
     }
-  });
-</script>
+
+    .wrapper {
+      max-width: 700px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    header img {
+      height: 120px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #003366;
+    }
+
+    hr {
+      border: none;
+      border-top: 2px solid #ccc;
+      margin: 20px 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #003366;
+      color: white;
+      border: none;
+      margin-top: 30px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    button:hover {
+      background-color: #005599;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #successMessage {
+      display: none;
+      margin-top: 20px;
+      color: green;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .checkbox-group {
+      display: flex;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .checkbox-group label {
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <img src="https://www.hotelsabrinaonline.it/wp-content/uploads/2022/06/Logo-Hotel-Sabrina-50-anni-2022-01.png" alt="Hotel Sabrina">
+    </header>
+
+    <h1>Menù del Giorno</h1>
+
+    <div id="step1">
+      <label for="cognome">Cognome</label>
+      <input type="text" id="cognome" placeholder="Inserisci il cognome">
+
+      <label for="camera">Numero della camera</label>
+      <input type="number" id="camera" placeholder="Es. 203">
+
+      <label for="persone">Numero di persone</label>
+      <input type="number" id="persone" placeholder="Es. 2">
+
+      <button onclick="proseguiStep2()">Accedi al Menù</button>
+    </div>
+
+    <form id="step2" class="hidden">
+      <h2>🍽️ Menù Pranzo</h2>
+      <hr>
+
+      <label for="primoPranzo">Primi Pranzo</label>
+      <select id="primoPranzo" name="primoPranzo"></select>
+
+      <label for="secondoPranzo">Secondi Pranzo</label>
+      <select id="secondoPranzo" name="secondoPranzo"></select>
+
+      <label for="contornoPranzo">Contorni Pranzo</label>
+      <select id="contornoPranzo" name="contornoPranzo"></select>
+
+      <label for="dessertPranzo">Dessert Pranzo</label>
+      <select id="dessertPranzo" name="dessertPranzo"></select>
+
+      <label for="extraPranzo">Richieste pranzo</label>
+      <textarea id="extraPranzo" name="extraPranzo" rows="2" placeholder="Scrivi qui eventuali richieste per il pranzo..."></textarea>
+
+      <h2>🌙 Menù Cena</h2>
+      <hr>
+
+      <label for="primoCena">Primi Cena</label>
+      <select id="primoCena" name="primoCena"></select>
+
+      <label for="secondoCena">Secondi Cena</label>
+      <select id="secondoCena" name="secondoCena"></select>
+
+      <label for="contornoCena">Contorni Cena</label>
+      <select id="contornoCena" name="contornoCena"></select>
+
+      <label for="dessertCena">Dessert Cena</label>
+      <select id="dessertCena" name="dessertCena"></select>
+
+      <label for="extra">Richieste particolari</label>
+      <textarea id="extra" name="extra" rows="3" placeholder="Scrivi qui eventuali richieste generali..."></textarea>
+
+      <label>Esigenze alimentari</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="esigenze" value="Celiachia"> Celiachia</label>
+        <label><input type="checkbox" name="esigenze" value="Intolleranze"> Intolleranze</label>
+        <label><input type="checkbox" name="esigenze" value="Vegetariano"> Vegetariano</label>
+      </div>
+
+      <button type="submit">Invia il Menù</button>
+    </form>
+
+    <div id="successMessage">
+      ✅ Il menù è stato inviato correttamente allo staff! Grazie 😊
+    </div>
+  </div>
+
+  <script>
+    function proseguiStep2() {
+      const cognome = document.getElementById('cognome').value.trim();
+      const camera = document.getElementById('camera').value.trim();
+      const persone = document.getElementById('persone').value.trim();
+
+      if (!cognome || !camera || !persone) {
+        alert("Compila tutti i campi prima di proseguire.");
+        return;
+      }
+
+      document.getElementById('step1').classList.add('hidden');
+      document.getElementById('step2').classList.remove('hidden');
+    }
+
+    document.getElementById("step2").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const getValue = id => document.getElementById(id)?.value || "";
+
+      const dati = {
+        cognome: getValue("cognome"),
+        camera: getValue("camera"),
+        persone: getValue("persone"),
+        primi_pranzo: getValue("primoPranzo"),
+        secondi_pranzo: getValue("secondoPranzo"),
+        contorni_pranzo: getValue("contornoPranzo"),
+        dessert_pranzo: getValue("dessertPranzo"),
+        extra_pranzo: getValue("extraPranzo"),
+        primi_cena: getValue("primoCena"),
+        secondi_cena: getValue("secondoCena"),
+        contorni_cena: getValue("contornoCena"),
+        dessert_cena: getValue("dessertCena"),
+        extra: getValue("extra"),
+        esigenze: [...document.querySelectorAll('input[name="esigenze"]:checked')].map(e => e.value).join(", ")
+      };
+
+      try {
+        await fetch("https://script.google.com/macros/s/AKfycbzokUc-Gnc9D9LmcC-MsLj1DxTgla-w7haZed7kdD2icKo9JE79LyRD13_YJ6Zc_hmb/exec", {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(dati)
+        });
+
+        document.getElementById("step2").classList.add("hidden");
+        document.getElementById("successMessage").style.display = "block";
+
+      } catch (err) {
+        alert("Errore durante l'invio del menù.");
+        console.error(err);
+      }
+    });
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      const url = "https://script.google.com/macros/s/AKfycbzokUc-Gnc9D9LmcC-MsLj1DxTgla-w7haZed7kdD2icKo9JE79LyRD13_YJ6Zc_hmb/exec";
+
+      try {
+        const response = await fetch(url);
+        const dati = await response.json();
+
+        if (dati.errore) {
+          alert("⚠️ Menù non trovato: " + dati.errore);
+          return;
+        }
+
+        const riempiSelect = (id, valori) => {
+          const select = document.getElementById(id);
+          select.innerHTML = '<option value="">Seleziona...</option>';
+          valori.forEach(piatto => {
+            const opt = document.createElement("option");
+            opt.value = piatto;
+            opt.textContent = piatto;
+            select.appendChild(opt);
+          });
+        };
+
+        riempiSelect("primoPranzo", dati.primiPranzo);
+        riempiSelect("secondoPranzo", dati.secondiPranzo);
+        riempiSelect("contornoPranzo", dati.contorniPranzo);
+        riempiSelect("dessertPranzo", dati.dessertPranzo);
+        riempiSelect("primoCena", dati.primiCena);
+        riempiSelect("secondoCena", dati.secondiCena);
+        riempiSelect("contornoCena", dati.contorniCena);
+        riempiSelect("dessertCena", dati.dessertCena);
+      } catch (err) {
+        alert("Errore durante il caricamento del menù del giorno.");
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
