@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fdf5e6; /* sabbia chiaro */
+      background-color: #fdf5e6;
       margin: 0;
       padding: 0;
     }
@@ -46,7 +46,7 @@
       font-weight: bold;
     }
 
-    input, select, button {
+    input, select, textarea, button {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -79,6 +79,11 @@
       text-align: center;
       font-weight: bold;
     }
+
+    .checkbox-group label {
+      display: block;
+      font-weight: normal;
+    }
   </style>
 </head>
 <body>
@@ -109,71 +114,43 @@
       <hr>
 
       <label for="primoPranzo">Primi Pranzo</label>
-      <select id="primoPranzo" name="primoPranzo">
-        <option value="">Seleziona un primo</option>
-        <option>Spaghetti alle vongole</option>
-        <option>Lasagne</option>
-        <option>Risotto ai funghi</option>
-      </select>
+      <select id="primoPranzo" name="primoPranzo"></select>
 
       <label for="secondoPranzo">Secondi Pranzo</label>
-      <select id="secondoPranzo" name="secondoPranzo">
-        <option value="">Seleziona un secondo</option>
-        <option>Pollo arrosto</option>
-        <option>Frittura mista</option>
-        <option>Scaloppine al limone</option>
-      </select>
+      <select id="secondoPranzo" name="secondoPranzo"></select>
 
       <label for="contornoPranzo">Contorni Pranzo</label>
-      <select id="contornoPranzo" name="contornoPranzo">
-        <option value="">Seleziona un contorno</option>
-        <option>Patate al forno</option>
-        <option>Insalata</option>
-        <option>Verdure grigliate</option>
-      </select>
+      <select id="contornoPranzo" name="contornoPranzo"></select>
 
       <label for="dessertPranzo">Dessert Pranzo</label>
-      <select id="dessertPranzo" name="dessertPranzo">
-        <option value="">Seleziona un dessert</option>
-        <option>Macedonia</option>
-        <option>Tiramisù</option>
-        <option>Panna cotta</option>
-      </select>
+      <select id="dessertPranzo" name="dessertPranzo"></select>
 
       <h2>🌙 Menù Cena</h2>
       <hr>
 
       <label for="primoCena">Primi Cena</label>
-      <select id="primoCena" name="primoCena">
-        <option value="">Seleziona un primo</option>
-        <option>Pasta al pesto</option>
-        <option>Ravioli burro e salvia</option>
-        <option>Minestrone</option>
-      </select>
+      <select id="primoCena" name="primoCena"></select>
 
       <label for="secondoCena">Secondi Cena</label>
-      <select id="secondoCena" name="secondoCena">
-        <option value="">Seleziona un secondo</option>
-        <option>Filetto di branzino</option>
-        <option>Bistecca</option>
-        <option>Polpette al sugo</option>
-      </select>
+      <select id="secondoCena" name="secondoCena"></select>
 
       <label for="contornoCena">Contorni Cena</label>
-      <select id="contornoCena" name="contornoCena">
-        <option value="">Seleziona un contorno</option>
-        <option>Purè di patate</option>
-        <option>Carote lesse</option>
-        <option>Insalata mista</option>
-      </select>
+      <select id="contornoCena" name="contornoCena"></select>
 
       <label for="dessertCena">Dessert Cena</label>
-      <select id="dessertCena" name="dessertCena">
-        <option value="">Seleziona un dessert</option>
-        <option>Gelato</option>
-        <option>Crostata</option>
-        <option>Frutta fresca</option>
-      </select>
+      <select id="dessertCena" name="dessertCena"></select>
+
+      <label for="extra">Piatti extra o richieste particolari</label>
+      <textarea id="extra" name="extra" rows="3" placeholder="Scrivi qui eventuali richieste..."></textarea>
+
+      <label>Esigenze alimentari</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="esigenze" value="Celiachia"> Celiachia</label>
+        <label><input type="checkbox" name="esigenze" value="Intolleranze"> Intolleranze</label>
+        <label><input type="checkbox" name="esigenze" value="Vegetariano"> Vegetariano</label>
+        <label><input type="checkbox" name="esigenze" value="Vegano"> Vegano</label>
+        <label><input type="checkbox" name="esigenze" value="Altro"> Altro</label>
+      </div>
 
       <button type="submit">Invia il Menù</button>
     </form>
@@ -201,13 +178,46 @@
     document.getElementById("step2").addEventListener("submit", function (e) {
       e.preventDefault();
 
-      // Qui dovresti aggiungere la funzione che invia i dati al backend (Apps Script, PHP, ecc.)
-
-      // Mostra messaggio di successo
+      // Messaggio di successo simulato (integra qui invio a Google Apps Script se vuoi)
       document.getElementById("successMessage").style.display = "block";
-
-      // Nasconde il form (opzionale)
       document.getElementById("step2").classList.add("hidden");
+    });
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      const url = "https://script.google.com/macros/s/AKfycbzokUc-Gnc9D9LmcC-MsLj1DxTgla-w7haZed7kdD2icKo9JE79LyRD13_YJ6Zc_hmb/exec";
+
+      try {
+        const response = await fetch(url);
+        const dati = await response.json();
+
+        if (dati.errore) {
+          alert("⚠️ Menù non trovato: " + dati.errore);
+          return;
+        }
+
+        const riempiSelect = (id, valori) => {
+          const select = document.getElementById(id);
+          select.innerHTML = '<option value="">Seleziona...</option>';
+          valori.forEach(piatto => {
+            const opt = document.createElement("option");
+            opt.value = piatto;
+            opt.textContent = piatto;
+            select.appendChild(opt);
+          });
+        };
+
+        riempiSelect("primoPranzo", dati.primiPranzo);
+        riempiSelect("secondoPranzo", dati.secondiPranzo);
+        riempiSelect("contornoPranzo", dati.contorniPranzo);
+        riempiSelect("dessertPranzo", dati.dessertPranzo);
+        riempiSelect("primoCena", dati.primiCena);
+        riempiSelect("secondoCena", dati.secondiCena);
+        riempiSelect("contornoCena", dati.contorniCena);
+        riempiSelect("dessertCena", dati.dessertCena);
+      } catch (err) {
+        alert("Errore durante il caricamento del menù del giorno.");
+        console.error(err);
+      }
     });
   </script>
 </body>
