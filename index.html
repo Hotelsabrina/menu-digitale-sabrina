@@ -5,154 +5,173 @@
   <title>Menù del Giorno - Hotel Sabrina</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #fef9f5;
-      padding: 30px;
-      color: #333;
+      margin: 0;
+      padding: 0;
     }
 
-    h1 {
+    .wrapper {
+      max-width: 700px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
       text-align: center;
       color: #003366;
-      margin-bottom: 30px;
-    }
-
-    h2 {
-      font-size: 22px;
-      color: #003366;
-      margin-top: 40px;
-      margin-bottom: 10px;
     }
 
     hr {
       border: none;
       border-top: 2px solid #ccc;
-      margin-bottom: 20px;
+      margin: 20px 0;
     }
 
     label {
-      font-weight: bold;
       display: block;
       margin-top: 15px;
+      font-weight: bold;
     }
 
-    select, input[type="text"], input[type="number"] {
+    input, select, button {
       width: 100%;
-      padding: 8px;
+      padding: 10px;
       margin-top: 5px;
+      border-radius: 5px;
       border: 1px solid #ccc;
-      border-radius: 4px;
-      background-color: #fff;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
+      font-size: 16px;
     }
 
     button {
-      margin-top: 30px;
       background-color: #003366;
       color: white;
-      padding: 10px 20px;
       border: none;
-      border-radius: 5px;
-      font-size: 16px;
+      margin-top: 30px;
       cursor: pointer;
+      font-size: 18px;
     }
 
     button:hover {
       background-color: #005599;
     }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="wrapper">
     <h1>Menù del Giorno</h1>
 
-    <!-- Info cliente -->
-    <label for="cognome">Cognome</label>
-    <input type="text" id="cognome" name="cognome" placeholder="Inserisci il cognome">
+    <!-- STEP 1: Info Utente -->
+    <div id="step1">
+      <label for="cognome">Cognome</label>
+      <input type="text" id="cognome" placeholder="Inserisci il cognome">
 
-    <label for="camera">Numero della camera</label>
-    <input type="number" id="camera" name="camera" placeholder="Es. 203">
+      <label for="camera">Numero della camera</label>
+      <input type="number" id="camera" placeholder="Es. 203">
 
-    <label for="persone">Numero di persone</label>
-    <input type="number" id="persone" name="persone" placeholder="Es. 2">
+      <label for="persone">Numero di persone</label>
+      <input type="number" id="persone" placeholder="Es. 2">
 
-    <!-- Sezione PRANZO -->
-    <h2>🍽️ Menù Pranzo</h2>
-    <hr>
+      <button onclick="proseguiStep2()">Accedi al Menù</button>
+    </div>
 
-    <label for="primoPranzo">Primi Pranzo</label>
-    <select id="primoPranzo" name="primoPranzo">
-      <option value="">Seleziona un primo</option>
-      <option>Spaghetti alle vongole</option>
-      <option>Lasagne</option>
-      <option>Risotto ai funghi</option>
-    </select>
+    <!-- STEP 2: Menù -->
+    <form id="step2" class="hidden">
+      <h2>🍽️ Menù Pranzo</h2>
+      <hr>
 
-    <label for="secondoPranzo">Secondi Pranzo</label>
-    <select id="secondoPranzo" name="secondoPranzo">
-      <option value="">Seleziona un secondo</option>
-      <option>Pollo arrosto</option>
-      <option>Frittura mista</option>
-      <option>Scaloppine al limone</option>
-    </select>
+      <label for="primoPranzo">Primi Pranzo</label>
+      <select id="primoPranzo" name="primoPranzo">
+        <option value="">Seleziona un primo</option>
+        <option>Spaghetti alle vongole</option>
+        <option>Lasagne</option>
+        <option>Risotto ai funghi</option>
+      </select>
 
-    <label for="contornoPranzo">Contorni Pranzo</label>
-    <select id="contornoPranzo" name="contornoPranzo">
-      <option value="">Seleziona un contorno</option>
-      <option>Patate al forno</option>
-      <option>Insalata</option>
-      <option>Verdure grigliate</option>
-    </select>
+      <label for="secondoPranzo">Secondi Pranzo</label>
+      <select id="secondoPranzo" name="secondoPranzo">
+        <option value="">Seleziona un secondo</option>
+        <option>Pollo arrosto</option>
+        <option>Frittura mista</option>
+        <option>Scaloppine al limone</option>
+      </select>
 
-    <label for="dessertPranzo">Dessert Pranzo</label>
-    <select id="dessertPranzo" name="dessertPranzo">
-      <option value="">Seleziona un dessert</option>
-      <option>Macedonia</option>
-      <option>Tiramisù</option>
-      <option>Panna cotta</option>
-    </select>
+      <label for="contornoPranzo">Contorni Pranzo</label>
+      <select id="contornoPranzo" name="contornoPranzo">
+        <option value="">Seleziona un contorno</option>
+        <option>Patate al forno</option>
+        <option>Insalata</option>
+        <option>Verdure grigliate</option>
+      </select>
 
-    <!-- Sezione CENA -->
-    <h2>🌙 Menù Cena</h2>
-    <hr>
+      <label for="dessertPranzo">Dessert Pranzo</label>
+      <select id="dessertPranzo" name="dessertPranzo">
+        <option value="">Seleziona un dessert</option>
+        <option>Macedonia</option>
+        <option>Tiramisù</option>
+        <option>Panna cotta</option>
+      </select>
 
-    <label for="primoCena">Primi Cena</label>
-    <select id="primoCena" name="primoCena">
-      <option value="">Seleziona un primo</option>
-      <option>Pasta al pesto</option>
-      <option>Ravioli burro e salvia</option>
-      <option>Minestrone</option>
-    </select>
+      <h2>🌙 Menù Cena</h2>
+      <hr>
 
-    <label for="secondoCena">Secondi Cena</label>
-    <select id="secondoCena" name="secondoCena">
-      <option value="">Seleziona un secondo</option>
-      <option>Filetto di branzino</option>
-      <option>Bistecca</option>
-      <option>Polpette al sugo</option>
-    </select>
+      <label for="primoCena">Primi Cena</label>
+      <select id="primoCena" name="primoCena">
+        <option value="">Seleziona un primo</option>
+        <option>Pasta al pesto</option>
+        <option>Ravioli burro e salvia</option>
+        <option>Minestrone</option>
+      </select>
 
-    <label for="contornoCena">Contorni Cena</label>
-    <select id="contornoCena" name="contornoCena">
-      <option value="">Seleziona un contorno</option>
-      <option>Purè di patate</option>
-      <option>Carote lesse</option>
-      <option>Insalata mista</option>
-    </select>
+      <label for="secondoCena">Secondi Cena</label>
+      <select id="secondoCena" name="secondoCena">
+        <option value="">Seleziona un secondo</option>
+        <option>Filetto di branzino</option>
+        <option>Bistecca</option>
+        <option>Polpette al sugo</option>
+      </select>
 
-    <label for="dessertCena">Dessert Cena</label>
-    <select id="dessertCena" name="dessertCena">
-      <option value="">Seleziona un dessert</option>
-      <option>Gelato</option>
-      <option>Crostata</option>
-      <option>Frutta fresca</option>
-    </select>
+      <label for="contornoCena">Contorni Cena</label>
+      <select id="contornoCena" name="contornoCena">
+        <option value="">Seleziona un contorno</option>
+        <option>Purè di patate</option>
+        <option>Carote lesse</option>
+        <option>Insalata mista</option>
+      </select>
 
-    <button type="submit">Invia Menù</button>
+      <label for="dessertCena">Dessert Cena</label>
+      <select id="dessertCena" name="dessertCena">
+        <option value="">Seleziona un dessert</option>
+        <option>Gelato</option>
+        <option>Crostata</option>
+        <option>Frutta fresca</option>
+      </select>
+
+      <button type="submit">Invia il Menù</button>
+    </form>
   </div>
+
+  <script>
+    function proseguiStep2() {
+      const cognome = document.getElementById('cognome').value.trim();
+      const camera = document.getElementById('camera').value.trim();
+      const persone = document.getElementById('persone').value.trim();
+
+      if (!cognome || !camera || !persone) {
+        alert("Compila tutti i campi prima di proseguire.");
+        return;
+      }
+
+      document.getElementById('step1').classList.add('hidden');
+      document.getElementById('step2').classList.remove('hidden');
+    }
+  </script>
 </body>
 </html>
