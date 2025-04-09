@@ -2,27 +2,27 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Menù del Giorno - Hotel Sabrina</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #fdf6ed;
+      color: #333;
       margin: 0;
       padding: 0;
-      color: #333;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 800px;
       margin: auto;
       padding: 2rem;
     }
 
     .logo {
       display: block;
-      max-width: 250px;
-      margin: 1rem auto 2rem;
+      margin: auto;
+      max-width: 220px;
     }
 
     h1 {
@@ -31,93 +31,134 @@
     }
 
     form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .hidden {
+      display: none;
     }
 
     label {
       font-weight: bold;
+      display: block;
+      margin-top: 1rem;
     }
 
-    input, select, textarea {
+    input, select, textarea, button {
+      width: 100%;
       padding: 0.7rem;
-      font-size: 1rem;
+      margin-top: 0.3rem;
+      border-radius: 5px;
       border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    textarea {
-      resize: vertical;
+      font-size: 1rem;
     }
 
     button {
       background-color: #2c4a7a;
       color: white;
-      padding: 0.9rem;
-      font-size: 1rem;
       border: none;
-      border-radius: 6px;
+      margin-top: 2rem;
       cursor: pointer;
     }
 
     button:hover {
-      background-color: #1b2f5b;
+      background-color: #1e3559;
     }
 
-    @media (max-width: 600px) {
-      .container {
-        padding: 1rem;
-      }
+    .note {
+      background: #fff8dc;
+      border-left: 5px solid #2c4a7a;
+      padding: 1rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img src="https://www.hotelsabrinaonline.it/wp-content/uploads/2022/06/Logo-Hotel-Sabrina-50-anni-2022-01.png" alt="Logo Hotel Sabrina" class="logo" />
+    <img class="logo" src="https://www.hotelsabrinaonline.it/wp-content/uploads/2022/06/Logo-Hotel-Sabrina-50-anni-2022-01.png" alt="Hotel Sabrina">
     <h1>Menù del Giorno</h1>
 
-    <form id="menuForm">
-      <label>Numero Camera:</label>
-      <input type="number" name="camera" required />
+    <form id="accessForm">
+      <label for="camera">Numero Camera</label>
+      <input type="number" id="camera" required>
 
-      <label>Numero Persone:</label>
-      <input type="number" name="persone" required />
+      <label for="persone">Numero Persone</label>
+      <input type="number" id="persone" required>
 
-      <label>Cognome:</label>
-      <input type="text" name="cognome" required />
+      <label for="cognome">Cognome</label>
+      <input type="text" id="cognome" required>
 
-      <label>Primi (Pranzo):</label>
-      <input type="text" name="primi_pranzo" />
+      <button type="submit">Vai al Menù</button>
+    </form>
 
-      <label>Secondi (Pranzo):</label>
-      <input type="text" name="secondi_pranzo" />
+    <form id="menuForm" class="hidden">
+      <div class="note">
+        Compila il menù selezionando i piatti dal menù a tendina. Se compili solo il pranzo o la cena, verrà considerata mezza pensione.
+      </div>
 
-      <label>Contorni (Pranzo):</label>
-      <input type="text" name="contorni_pranzo" />
+      <label>Primi Pranzo</label>
+      <select required>
+        <option value="">Seleziona...</option>
+        <option>Lasagna al forno</option>
+        <option>Spaghetti alle vongole</option>
+      </select>
 
-      <label>Dessert (Pranzo):</label>
-      <input type="text" name="dessert_pranzo" />
+      <label>Secondi Pranzo</label>
+      <select>
+        <option value="">Seleziona...</option>
+        <option>Orata al forno</option>
+        <option>Pollo arrosto</option>
+      </select>
 
-      <label>Primi (Cena):</label>
-      <input type="text" name="primi_cena" />
+      <label>Contorni Pranzo</label>
+      <select>
+        <option value="">Seleziona...</option>
+        <option>Insalata verde</option>
+        <option>Patate al forno</option>
+      </select>
 
-      <label>Secondi (Cena):</label>
-      <input type="text" name="secondi_cena" />
+      <label>Dessert Pranzo</label>
+      <select>
+        <option value="">Seleziona...</option>
+        <option>Tiramisù</option>
+        <option>Macedonia</option>
+      </select>
 
-      <label>Contorni (Cena):</label>
-      <input type="text" name="contorni_cena" />
+      <label>Primi Cena</label>
+      <select>
+        <option value="">Seleziona...</option>
+        <option>Risotto ai funghi</option>
+        <option>Pasta al pesto</option>
+      </select>
 
-      <label>Dessert (Cena):</label>
-      <input type="text" name="dessert_cena" />
+      <label>Secondi Cena</label>
+      <select>
+        <option value="">Seleziona...</option>
+        <option>Bistecca</option>
+        <option>Filetto di branzino</option>
+      </select>
 
-      <label>Richieste particolari / Piatti extra:</label>
-      <textarea name="extra" rows="3"></textarea>
+      <label>Contorni Cena</label>
+      <select>
+        <option value="">Seleziona...</option>
+        <option>Verdure grigliate</option>
+        <option>Purè di patate</option>
+      </select>
 
-      <label>Esigenze alimentari:</label>
-      <label><input type="checkbox" name="esigenze" value="Celiaco" /> Celiaco</label>
-      <label><input type="checkbox" name="esigenze" value="Vegetariano" /> Vegetariano</label>
-      <label><input type="checkbox" name="esigenze" value="Lattosio" /> Intolleranza al lattosio</label>
+      <label>Dessert Cena</label>
+      <select>
+        <option value="">Seleziona...</option>
+        <option>Gelato</option>
+        <option>Crema catalana</option>
+      </select>
+
+      <label>Richieste particolari</label>
+      <textarea rows="3" placeholder="Scrivi qui richieste extra o note..."></textarea>
+
+      <label>Esigenze alimentari</label>
+      <label><input type="checkbox" name="esigenze" value="Celiaco"> Celiaco</label>
+      <label><input type="checkbox" name="esigenze" value="Vegetariano"> Vegetariano</label>
+      <label><input type="checkbox" name="esigenze" value="Lattosio"> Intolleranza al lattosio</label>
 
       <p><strong>📞 Dalla vostra camera chiamare il numero 253 per parlare direttamente con la cucina.</strong></p>
 
@@ -126,10 +167,20 @@
   </div>
 
   <script>
-    document.getElementById("menuForm").addEventListener("submit", function (e) {
+    const accessForm = document.getElementById("accessForm");
+    const menuForm = document.getElementById("menuForm");
+
+    accessForm.addEventListener("submit", function(e) {
       e.preventDefault();
-      alert("Menù inviato con successo! Grazie.");
-      // Qui potremo collegare il salvataggio su Google Sheet + invio mail/telegram
+      accessForm.classList.add("hidden");
+      menuForm.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    menuForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Grazie! Il tuo menù è stato inviato alla cucina.");
+      // Qui potremo aggiungere invio a email / Telegram / Google Sheets
     });
   </script>
 </body>
