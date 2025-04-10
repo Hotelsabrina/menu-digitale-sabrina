@@ -214,7 +214,7 @@
         }
 
         const creaCampoQuantita = (piatto, categoria) => {
-          const id = `${categoria}_${piatto.replaceAll(" ", "_")}`;
+          const id = `${categoria}_${piatto.replace(/[^a-zA-Z0-9]/g, "_")}`;
           return `
             <div class="piatto">
               <label for="${id}">${piatto}</label>
