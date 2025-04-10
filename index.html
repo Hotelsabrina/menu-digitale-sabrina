@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -47,13 +46,21 @@
       font-weight: bold;
     }
 
-    input, select, textarea, button {
+    input[type="text"], input[type="number"], textarea, button {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
       border-radius: 5px;
       border: 1px solid #ccc;
       font-size: 16px;
+    }
+
+    .piatto {
+      margin-bottom: 10px;
+    }
+
+    .piatto label {
+      font-weight: normal;
     }
 
     button {
@@ -116,36 +123,14 @@
     <form id="step2" class="hidden">
       <h2>🍽️ Menù Pranzo</h2>
       <hr>
-
-      <label for="primoPranzo">Primi Pranzo</label>
-      <select id="primoPranzo" name="primoPranzo"></select>
-
-      <label for="secondoPranzo">Secondi Pranzo</label>
-      <select id="secondoPranzo" name="secondoPranzo"></select>
-
-      <label for="contornoPranzo">Contorni Pranzo</label>
-      <select id="contornoPranzo" name="contornoPranzo"></select>
-
-      <label for="dessertPranzo">Dessert Pranzo</label>
-      <select id="dessertPranzo" name="dessertPranzo"></select>
+      <div id="pranzoSection"></div>
 
       <label for="extraPranzo">Richieste pranzo</label>
       <textarea id="extraPranzo" name="extraPranzo" rows="2" placeholder="Scrivi qui eventuali richieste per il pranzo..."></textarea>
 
       <h2>🌙 Menù Cena</h2>
       <hr>
-
-      <label for="primoCena">Primi Cena</label>
-      <select id="primoCena" name="primoCena"></select>
-
-      <label for="secondoCena">Secondi Cena</label>
-      <select id="secondoCena" name="secondoCena"></select>
-
-      <label for="contornoCena">Contorni Cena</label>
-      <select id="contornoCena" name="contornoCena"></select>
-
-      <label for="dessertCena">Dessert Cena</label>
-      <select id="dessertCena" name="dessertCena"></select>
+      <div id="cenaSection"></div>
 
       <label for="extra">Richieste particolari</label>
       <textarea id="extra" name="extra" rows="3" placeholder="Scrivi qui eventuali richieste generali..."></textarea>
@@ -182,25 +167,15 @@
 
     document.getElementById("step2").addEventListener("submit", async function (e) {
       e.preventDefault();
-
-      const getValue = id => document.getElementById(id)?.value || "";
-
-      const dati = {
-        cognome: getValue("cognome"),
-        camera: getValue("camera"),
-        persone: getValue("persone"),
-        primi_pranzo: getValue("primoPranzo"),
-        secondi_pranzo: getValue("secondoPranzo"),
-        contorni_pranzo: getValue("contornoPranzo"),
-        dessert_pranzo: getValue("dessertPranzo"),
-        extra_pranzo: getValue("extraPranzo"),
-        primi_cena: getValue("primoCena"),
-        secondi_cena: getValue("secondoCena"),
-        contorni_cena: getValue("contornoCena"),
-        dessert_cena: getValue("dessertCena"),
-        extra: getValue("extra"),
-        esigenze: [...document.querySelectorAll('input[name="esigenze"]:checked')].map(e => e.value).join(", ")
-      };
+      const formData = new FormData(e.target);
+      const dati = {};
+      formData.forEach((value, key) => {
+        if (dati[key]) {
+          dati[key] += ", " + value;
+        } else {
+          dati[key] = value;
+        }
+      });
 
       try {
         await fetch("https://script.google.com/macros/s/AKfycbzokUc-Gnc9D9LmcC-MsLj1DxTgla-w7haZed7kdD2icKo9JE79LyRD13_YJ6Zc_hmb/exec", {
@@ -227,29 +202,35 @@
         const dati = await response.json();
 
         if (dati.errore) {
-          alert("⚠️ Menù non trovato: " + dati.errore);
+          alert("\u26a0\ufe0f Menù non trovato: " + dati.errore);
           return;
         }
 
-        const riempiSelect = (id, valori) => {
-          const select = document.getElementById(id);
-          select.innerHTML = '<option value="">Seleziona...</option>';
-          valori.forEach(piatto => {
-            const opt = document.createElement("option");
-            opt.value = piatto;
-            opt.textContent = piatto;
-            select.appendChild(opt);
+        const creaCampoQuantita = (piatto, categoria) => {
+          return `
+            <div class="piatto">
+              <label for="${categoria}_${piatto}">${piatto}</label>
+              <input type="number" id="${categoria}_${piatto}" name="${categoria}_${piatto}" min="0" max="6" placeholder="0">
+            </div>
+          `;
+        };
+
+        const caricaSezione = (containerId, piatti, categoria) => {
+          const container = document.getElementById(containerId);
+          piatti.forEach(piatto => {
+            container.innerHTML += creaCampoQuantita(piatto, categoria);
           });
         };
 
-        riempiSelect("primoPranzo", dati.primiPranzo);
-        riempiSelect("secondoPranzo", dati.secondiPranzo);
-        riempiSelect("contornoPranzo", dati.contorniPranzo);
-        riempiSelect("dessertPranzo", dati.dessertPranzo);
-        riempiSelect("primoCena", dati.primiCena);
-        riempiSelect("secondoCena", dati.secondiCena);
-        riempiSelect("contornoCena", dati.contorniCena);
-        riempiSelect("dessertCena", dati.dessertCena);
+        caricaSezione("pranzoSection", dati.primiPranzo, "pranzo_primo");
+        caricaSezione("pranzoSection", dati.secondiPranzo, "pranzo_secondo");
+        caricaSezione("pranzoSection", dati.contorniPranzo, "pranzo_contorno");
+        caricaSezione("pranzoSection", dati.dessertPranzo, "pranzo_dessert");
+
+        caricaSezione("cenaSection", dati.primiCena, "cena_primo");
+        caricaSezione("cenaSection", dati.secondiCena, "cena_secondo");
+        caricaSezione("cenaSection", dati.contorniCena, "cena_contorno");
+        caricaSezione("cenaSection", dati.dessertCena, "cena_dessert");
       } catch (err) {
         alert("Errore durante il caricamento del menù del giorno.");
         console.error(err);
