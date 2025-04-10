@@ -167,13 +167,20 @@
 
     document.getElementById("step2").addEventListener("submit", async function (e) {
       e.preventDefault();
-      const formData = new FormData(e.target);
-      const dati = {};
-      formData.forEach((value, key) => {
-        if (dati[key]) {
-          dati[key] += ", " + value;
-        } else {
-          dati[key] = value;
+
+      const dati = {
+        cognome: document.getElementById("cognome").value.trim(),
+        camera: document.getElementById("camera").value.trim(),
+        persone: document.getElementById("persone").value.trim(),
+        extra_pranzo: document.getElementById("extraPranzo").value.trim(),
+        extra: document.getElementById("extra").value.trim(),
+        esigenze: [...document.querySelectorAll('input[name="esigenze"]:checked')].map(e => e.value).join(", ")
+      };
+
+      document.querySelectorAll('input[type="number"]').forEach(input => {
+        const qty = parseInt(input.value);
+        if (!isNaN(qty) && qty > 0) {
+          dati[input.name] = qty;
         }
       });
 
@@ -207,10 +214,11 @@
         }
 
         const creaCampoQuantita = (piatto, categoria) => {
+          const id = `${categoria}_${piatto.replaceAll(" ", "_")}`;
           return `
             <div class="piatto">
-              <label for="${categoria}_${piatto}">${piatto}</label>
-              <input type="number" id="${categoria}_${piatto}" name="${categoria}_${piatto}" min="0" max="6" placeholder="0">
+              <label for="${id}">${piatto}</label>
+              <input type="number" id="${id}" name="${id}" min="0" max="6" placeholder="0">
             </div>
           `;
         };
